@@ -52,7 +52,7 @@
                   <h2><i>The times they are a changin'</i><br> Monitoring land dynamics from space </h2>
                       <p>
                         Martin Jung<br>
-                        <a id="link">m.jung@sussex.ac.uk</a>
+                        <a id="link">m.jung@sussex.ac.uk</a><br>
                       </p>
                 </div>
             </section>
@@ -124,8 +124,9 @@
           <script type="text/template">
           ## What is change ?
           <!-- .slide: data-transition="slide-in slide-out" data-background="white" -->
-          <p><img src="img/Changetypes.png" height="500px"> </img>
-          <small>Beaulieu <i>et al</i> (2012) doi: [10.1098/rsta.2011.0383](http://dx.doi.org/10.1098/rsta.2011.0383)</small></p>
+          <p><img src="img/ChangeTypes.png" height="500px"> </img>
+          <small>Beaulieu <i>et al</i> (2012) doi: [10.1098/rsta.2011.0383](http://dx.doi.org/10.1098/rsta.2011.0383)</small>
+        </p>
           </script>
       </section>
 
@@ -224,7 +225,7 @@
         <!-- .slide: data-transition="convex" data-background="#F9F9F9"-->
         ### Changes in mean + variance
         Optimal detection of changepoints with a linear computational cost
-        <small>Killick et al. (2012) doi: [10.1080/01621459.2012.737745}(http://dx.doi.org/10.1080/01621459.2012.737745)</small>
+        <small>Killick et al. (2012) doi: [10.1080/01621459.2012.737745](http://dx.doi.org/10.1080/01621459.2012.737745)</small>
 
         </script>
     </section>
@@ -281,7 +282,7 @@
 <section>
     <section data-markdown>
         <script type="text/template">
-          <!-- .slide: data-background="orange" data-transition="fade"-->
+          <!-- .slide: data-background="#2574A9" data-transition="fade"-->
 
           ### An ideal breakpoint detection?
 
@@ -321,9 +322,9 @@
     <section data-markdown>
         <script type="text/template">
         <!-- .slide: data-background="white" data-transition="slide-in slide-out"-->
-        ## Easy mamangement of large numbers of files
+        ### Manangement of large numbers of files
 
-        
+        <img src='img/ManualStorage.png'/>
 
         </script>
     </section>
@@ -332,90 +333,70 @@
     <section data-markdown>
         <script type="text/template">
         <!-- .slide: data-background="white" data-transition="slide-in slide-out"-->
-        ## Add & Commit
+        ### Instead Use a hierarchical file format
 
-        <center><pre><code data-trim>
-         // Adds everything
-         git add .
-         // Only a specific file
-         git add analysis.R
-
-         // Commit the changes with a message
-         git commit -m "Changed part 15 in the analysis"
-         </code></pre></center>
+        <img src='img/hdf5_structure4.jpg'/>
 
         </script>
     </section>
 
     <section data-markdown>
         <script type="text/template">
-        ![File](img/file_lifecycle.png)
+        <!-- .slide: data-background="#F9F9F9" data-transition="slide-in slide-out"-->
+          <img src='img/NewStorage.png'/ border-color="black">
+        <small> Compression ratio: <b> 64.2 %</b> <small>
         </script>
     </section>
 
     <section data-markdown>
         <script type="text/template">
         <!-- .slide: data-background="white" data-transition="slide-in slide-out"-->
-        ## Branching
-
         <center><pre><code data-trim>
-         // Make a new branch and switch to it
-         git checkout -b UpdatedVersion
-
-         // Back to master
-         git checkout master
-
+          root group (NETCDF4 data model, file format HDF5):
+              title: MCD43A4
+              description: contains EVI MCD43A4 for the UK
+              institution: University of Sussex, United Kingdom
+              source: based on MODIS Terra & Aqua - BRDF Product
+              year: 2007
+              projection: WGS84
+              dimensions(sizes): lat(2400), lon(2400), time(46)
+              variables(dimensions): float32 time(time), float32 lat(lat), float32 lon(lon), int32 crs(), float64 metric(time,lat,lon)
          </code></pre></center>
 
         </script>
     </section>
+
 
     <section data-markdown>
         <script type="text/template">
         <!-- .slide: data-background="white" data-transition="slide-in slide-out"-->
-        ## Push and pull
 
-        <center><pre><code data-trim>
-         // Push everything to github
-         git push origin mybranch
+        <pre><code data-trim data-noescape>
+        import xray
+        import matplotlib.pyplot as plt
+        f = xray.open_dataset('MCD43A4_h17v03_EVI.nc')
+        fm = f.sel(lon=[50.86],lat= [-0.088029], method='nearest')
+        .groupby('time.dayofyear').mean()
 
-         // Get last commits from repository
-         git pull
+        # Plot
+        plt.plot(fm.dayofyear,fm.metric)
+         </code></pre>
 
-         </code></pre></center>
-
-        </script>
-    </section>
-
-    <section data-markdown>
-        <script type="text/template">
-        <!-- .slide: data-background="darkblue" data-transition="zoom"-->
-        ## Something went wrong?
-        <pre><code data-trim>
-
-        </pre></code data-trim>
-
-        </script>
-    </section>
-
-    <section data-markdown>
-        <script type="text/template">
-        <!-- .slide: data-background="white" data-transition="zoom"-->
-
-        ### Awwwww. So many new commands
-
-        <huge> [Visit gitref.org](http://gitref.org) </huge>
+         <img src='img/xrayQuery.png'/ width="200px">
 
         </script>
     </section>
 </section>
 
+<!-- Parallel processing dask-->
 <section>
     <section data-markdown>
         <script type="text/template">
-        <!-- .slide: data-background="darkblue" data-transition="zoom"-->
+        <!-- .slide: data-background="#2574A9" data-transition="zoom"-->
 
-        ## About reproducibility in science
+        ### What if my data is to large to load into memory at once ?
+
+        <img src='img/dask.png'/> <!-- .element: class="fragment zoom-in" data-fragment-index="1" -->
 
         </script>
     </section>
@@ -423,23 +404,73 @@
     <section data-markdown>
         <script type="text/template">
         <!-- .slide: data-background="white" data-transition="zoom"-->
-
         <i>
-        > ... an article about computational result is advertising, not scholarship. The actual
-        > scholarship is the full software environment, code and data that produced the result.
+         > Dask divides arrays into many small pieces, called chunks, and provides out-of-core computation .
         </i>
 
-        Buckheit & Donoho (1995)
+        <img src='img/dask_array.png'/>
 
         </script>
     </section>
+
+
+    <section data-markdown>
+        <script type="text/template">
+        <!-- .slide: data-background="white" data-transition="zoom"-->
+        <pre><code data-trim data-noescape>
+        f = xray.open_dataset('MCD43A4_h17v03_EVI.nc',chunks=100)
+        f_1 = f.groupby('time.month').mean('time')
+        f_2 = f.mean('time') # Overall mean
+        full = (f_1.sel(month=3) - f_2).metric
+
+        # Now it gets computed
+        %time result = full.load()
+        </code></pre>
+
+        </script>
+    </section>
+
+    <section data-markdown>
+        <script type="text/template">
+        <!-- .slide: data-background="white" data-transition="zoom"-->
+        INSERT computation graph
+        </script>
+    </section>
+
+    <section data-markdown>
+        <script type="text/template">
+        <!-- .slide: data-background="white" data-transition="zoom"-->
+        > Total: Wall time: 30.7 s
+        <img src='img\daskMarchEVI.png'/>
+
+        </script>
+    </section>
+
+    <section data-markdown>
+        <script type="text/template">
+        <!-- .slide: data-background="white" data-transition="zoom"-->
+        ## Extendable for parallel computing
+        <pre><code data-trim data-noescape>
+        from distributed import Client
+        client = Client() # distributes work process over workers
+        </code></pre>
+
+        <img src='img\grid_search_schedule.gif'/>
+
+        </script>
+    </section>
+
 
 </section>
 
 <section data-markdown>
         <script type="text/template">
-        ## Helpful? Go to [github.com](http://github.com) and open an account now
+        <!-- .slide: data-background="black" data-transition="zoom"-->
 
+        ## Interesting? Helpful?
+        <center>
+        <img src='img/Monkey_Island_Skel.gif'/>
+        </center>
 
         </script>
 </section>
