@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Monitoring land dynamics from space </title>
+
+        <meta name="description" content="Quantitative Analysis group - Unversity of Sussex">
+        <meta name="author" content="Martin Jung">
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+        <link rel="stylesheet" href="reveal.js/css/reveal.css">
+        <link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">
+
+       <!-- Custom CSS -->
+        <link rel="stylesheet" href="css/custom.css">
+
+
+        <!-- Code syntax highlighting -->
+        <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+
+        <!-- Printing and PDF exports -->
+	<link rel="stylesheet" media="print" href="reveal.js/css/print/pdf.css" />
+	<script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="reveal.js/lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+            <!-- Any section element inside of this container is displayed as a slide -->
+
+            <div class="slides">
+            <!-- Title slide-->
+            <section data-background-image="img/merisatUK.jpg">
+
+                <div id="title-box">
+                  <h2><i>The times they are a changin'</i><br> Monitoring land dynamics from space </h2>
+                      <p>
+                        Martin Jung<br>
+                        <a id="link">m.jung@sussex.ac.uk</a>
+                      </p>
+                </div>
+            </section>
+
+        <section>
+            <section data-markdown>
+                <script type="text/template">
+                <!-- .slide: data-background="white" data-transition="slide"-->
+
+                ## My background
+
+                  - PhD student in environmental science  <!-- .element: class="fragment fade-in" data-fragment-index="1" -->
+
+                  - Mainly coding in R | Python | Bash <!-- .element: class="fragment fade-in" data-fragment-index="2" -->
+
+                  <img src="img/data_scientist_ven.png" height="400px"> </img> <!-- .element: class="fragment fade-in" data-fragment-index="3" -->
+
+                </script>
+            </section>
+
+            <section data-markdown>
+                <script type="text/template">
+                <!-- .slide: data-background="white" data-transition="concave"-->
+                ## Global biodiversity modelling
+                <img src='img/newbold.png' height="300px"/>
+                <br>
+                Newbold et al. (2016)
+                <br> DOI: <a> 10.1126/science.aaf2201  </a>
+                </script>
+            </section>
+
+            <section data-markdown>
+                <script type="text/template">
+                <!-- .slide: data-background="black" data-transition="concave"-->
+                ## Satellite data
+                <img src='img/Picture1.jpg'/>
+                </script>
+            </section>
+
+            <section data-markdown>
+                <script type="text/template">
+                <!-- .slide: data-background="black" data-transition="concave"-->
+                <img src='img/Rivers.gif'/>
+                </script>
+            </section>
+
+            <section data-markdown>
+                <script type="text/template">
+                <!-- .slide: data-background="black" data-transition="concave"-->
+                ## Multispectral images
+                <img src='img/multispectral.gif' width="350" />
+                <img src='img/ndvi_example.jpg' width="310" />
+                </script>
+            </section>
+
+            <!-- Last -->
+            <section data-markdown>
+                <script type="text/template">
+                <!-- .slide: data-background="black" data-transition="concave"-->
+                ## Vegetation phenology
+                <img src='img/Phenology.gif' width="75%"/>
+                </script>
+            </section>
+        </section>
+
+<!-- Starting breakpoint BFAST -->
+<section>
+      <section data-markdown>
+          <script type="text/template">
+          ## What is change ?
+          <!-- .slide: data-transition="slide-in slide-out" data-background="white" -->
+          <p><img src="img/Changetypes.png" height="500px"> </img>
+          <small>Beaulieu <i>et al</i> (2012) doi: [10.1098/rsta.2011.0383](http://dx.doi.org/10.1098/rsta.2011.0383)</small></p>
+          </script>
+      </section>
+
+      <section data-markdown>
+          <script type="text/template">
+          <!-- .slide: data-transition="slide-in slide-out" data-background="#F9F9F9" -->
+          ## Changes in trend
+          <p>
+            <b>BFAST</b>
+            <br>Breaks For Additive Seasonal and Trend
+          </p>
+          <small>Verbesselt et al. (2010) doi: [10.1016/j.rse.2010.08.003](http://dx.doi.org/10.1016/j.rse.2010.08.003)</small>
+
+          Decomposes and assess change in trend, seasonal and remainder term of time series
+
+          <b>R</b>: <i>bfast</i>,  <i>strucchange</i>
+
+          </script>
+      </section>
+
+    <section data-markdown>
+        <script type="text/template">
+          <div id="forms">
+          `$$ Y_t = T_t + S_t + e_t $$` `$$(t = 1, ..., n) $$`
+        <br>
+        <hr>
+        <p>
+        `$$ T_t = \alpha_i + \beta_i t \\
+          \tau_{j-1}^* < \tau \le \tau_j^* \quad (j = 1, \ldots, m) $$`
+        </p> <!-- .element: class="fragment fade-in" data-fragment-index="1" -->
+        </div>
+        </script>
+    </section>
+
+    <section data-markdown>
+        <script type="text/template">
+        <!-- .slide: data-transition="slide-in slide-out" data-background="#F9F9F9" -->
+        `$$ S_t = \sum_{k=1}^K a_{j,k} \ sin \left( \frac{2\pi k t}{f} + \delta_{j,k} \right) $$`
+
+        <br>
+        <p>
+        `$ K \quad = \text{Harmonic terms} \\
+         a_{j,k} \quad = \text{Amplitude} \\
+         \delta_{j,k} \quad = \text{Phase} \\
+         f \quad = \text{Frequency} $`
+        </p>  <!-- .element: class="fragment fade-in" data-fragment-index="1" -->
+        <p> `$$ \tau_{j-1}^\# < \tau \le \tau_j^\# \quad (j = 1, \ldots, p) $$` <!-- .element: class="fragment fade-in" data-fragment-index="2" -->
+        </p>
+        </script>
+    </section>
+
+
+    <section data-markdown>
+        <script type="text/template">
+    <!-- .slide: data-transition="slide-in slide-out" data-background="white" -->
+    <img src='img/MoCos.png'/ width="600px">
+    <br>
+    <small>`$$ MO_t = \frac{1}{\delta \sqrt{n}} \sum_{s=t-h+1}^t \left(y_s -\hat y_s \right) $$` </small>  <!-- .element: class="fragment fade-in" data-fragment-index="1" -->
+
+        </script>
+    </section>
+
+    <section data-markdown>
+        <script type="text/template">
+        <!-- .slide: data-transition="zoom-out" data-background="white" -->
+        1. If test indicates presence of breakpoints:  Estimate number and position in  $$ Y_t - S_t $$ and $$ Y_t - T_t $$
+        2. Reiterate until est. parameters remain unchanged. <!-- .element: class="fragment fade-in" data-fragment-index="1" -->
+
+        </script>
+    </section>
+
+    <section data-markdown>
+        <script type="text/template">
+        <!-- .slide: data-transition="zoom-out" data-background="white" -->
+        <img src='img/BFAST_full.png'/>
+
+        </script>
+    </section>
+
+    <section data-markdown>
+        <script type="text/template">
+        <!-- .slide: data-transition="zoom-in zoom-out" data-background="white" -->
+        ### Does it work ? Sort, of...
+        <img src='img/BFASTSuccess.png'/>
+
+        </script>
+    </section>
+
+</section>
+
+<!-- Starting breakpoint PELT -->
+<section>
+
+    <section data-markdown>
+        <script type="text/template">
+        <!-- .slide: data-transition="convex" data-background="#F9F9F9"-->
+        ### Changes in mean + variance
+        Optimal detection of changepoints with a linear computational cost
+        <small>Killick et al. (2012) doi: [10.1080/01621459.2012.737745}(http://dx.doi.org/10.1080/01621459.2012.737745)</small>
+
+        </script>
+    </section>
+
+    <section data-markdown>
+        <script type="text/template">
+          <!-- .slide: data-transition="convex" data-background="#F9F9F9"-->
+          `$$ \sum_{i=1}^{m+1} [C(y_{(\tau_{i-1}+1):\tau_i })]  + \beta f (m) $$`
+          <br>
+          <p>
+          `$ C \quad = \text{Cost function for segment} \\
+           \beta f (m)  \quad = \text{Penalty term} \\ $`
+          </p>  <!-- .element: class="fragment fade-in" data-fragment-index="1" -->
+
+        </script>
+    </section>
+
+    <section data-markdown>
+        <script type="text/template">
+          <!-- .slide: data-transition="convex" data-background="white"-->
+          <img src='img/pelt.png'/>
+          <center><small>( Source: Michael Messer - Uni Frankfurt )</small></center>
+        </script>
+    </section>
+
+    <section data-markdown>
+        <script type="text/template">
+          <!-- .slide: data-transition="convex" data-background="white"-->
+          #### Does it work ?
+          <img src='img/Fig_Raw.png'/>
+
+        </script>
+    </section>
+
+    <section data-markdown>
+        <script type="text/template">
+          <!-- .slide: data-transition="convex" data-background="white"-->
+          <img src='img/Fig_Bfast.png'/>
+
+        </script>
+    </section>
+
+    <section data-markdown>
+        <script type="text/template">
+          <!-- .slide: data-transition="convex" data-background="white"-->
+          <img src='img/Fig_PELT.png'/>
+
+        </script>
+    </section>
+
+</section>
+
+<!-- Open call -->
+<section>
+    <section data-markdown>
+        <script type="text/template">
+          <!-- .slide: data-background="orange" data-transition="fade"-->
+
+          ### An ideal breakpoint detection?
+
+          - Detects both changes in variance and abrupt breaks  <!-- .element: class="fragment zoom-in" data-fragment-index="1" -->
+          - Can test for none, single and multiple breaks <!-- .element: class="fragment fade-in" data-fragment-index="2" -->
+          - Works with missing data! <!-- .element: class="fragment fade-in" data-fragment-index="3" -->
+          - robust to noise and accounts for seasonal fluctuations <!-- .element: class="fragment fade-in" data-fragment-index="3" -->
+          - multivariate measurements of ordered observations ? <!-- .element: class="fragment fade-in" data-fragment-index="4" -->
+          - Execution time under 5s ideally <!-- .element: class="fragment fade-in" data-fragment-index="5" -->
+
+        </script>
+    </section>
+
+</section>
+
+<!-- Big data processing in python -->
+<section>
+    <section data-markdown>
+        <script type="text/template">
+        <!-- .slide: data-background="white" data-transition="slide-in slide-out"-->
+        ### Challenges of working with spatial data
+        <div id="left">
+          <img src='img/StackArrow.png'/ height="400px">
+        </div>
+        <div id="right">
+          <p>
+          Multi-dimensional
+          <br>arrays x \* y \* z
+          <br><br>
+          Big data <br>(46 * 32y = ~1472GB)
+
+          </p>
+        </div>
+        </script>
+    </section>
+
+    <section data-markdown>
+        <script type="text/template">
+        <!-- .slide: data-background="white" data-transition="slide-in slide-out"-->
+        ## Easy mamangement of large numbers of files
+
+        
+
+        </script>
+    </section>
+
+
+    <section data-markdown>
+        <script type="text/template">
+        <!-- .slide: data-background="white" data-transition="slide-in slide-out"-->
+        ## Add & Commit
+
+        <center><pre><code data-trim>
+         // Adds everything
+         git add .
+         // Only a specific file
+         git add analysis.R
+
+         // Commit the changes with a message
+         git commit -m "Changed part 15 in the analysis"
+         </code></pre></center>
+
+        </script>
+    </section>
+
+    <section data-markdown>
+        <script type="text/template">
+        ![File](img/file_lifecycle.png)
+        </script>
+    </section>
+
+    <section data-markdown>
+        <script type="text/template">
+        <!-- .slide: data-background="white" data-transition="slide-in slide-out"-->
+        ## Branching
+
+        <center><pre><code data-trim>
+         // Make a new branch and switch to it
+         git checkout -b UpdatedVersion
+
+         // Back to master
+         git checkout master
+
+         </code></pre></center>
+
+        </script>
+    </section>
+
+    <section data-markdown>
+        <script type="text/template">
+        <!-- .slide: data-background="white" data-transition="slide-in slide-out"-->
+        ## Push and pull
+
+        <center><pre><code data-trim>
+         // Push everything to github
+         git push origin mybranch
+
+         // Get last commits from repository
+         git pull
+
+         </code></pre></center>
+
+        </script>
+    </section>
+
+    <section data-markdown>
+        <script type="text/template">
+        <!-- .slide: data-background="darkblue" data-transition="zoom"-->
+        ## Something went wrong?
+        <pre><code data-trim>
+
+        </pre></code data-trim>
+
+        </script>
+    </section>
+
+    <section data-markdown>
+        <script type="text/template">
+        <!-- .slide: data-background="white" data-transition="zoom"-->
+
+        ### Awwwww. So many new commands
+
+        <huge> [Visit gitref.org](http://gitref.org) </huge>
+
+        </script>
+    </section>
+</section>
+
+<section>
+    <section data-markdown>
+        <script type="text/template">
+        <!-- .slide: data-background="darkblue" data-transition="zoom"-->
+
+        ## About reproducibility in science
+
+        </script>
+    </section>
+
+    <section data-markdown>
+        <script type="text/template">
+        <!-- .slide: data-background="white" data-transition="zoom"-->
+
+        <i>
+        > ... an article about computational result is advertising, not scholarship. The actual
+        > scholarship is the full software environment, code and data that produced the result.
+        </i>
+
+        Buckheit & Donoho (1995)
+
+        </script>
+    </section>
+
+</section>
+
+<section data-markdown>
+        <script type="text/template">
+        ## Helpful? Go to [github.com](http://github.com) and open an account now
+
+
+        </script>
+</section>
+
+
+            <!-- And the rest in markdown-->
+<!--            <section data-markdown="slides.md" data-separator="^------\n" data-separator-vertical="^---\n">
+            </section>
+            -->
+
+            </div> <!-- End of slides -->
+            <!-- Footer -->
+            <div class="footer">
+                <img src="img/USLogo.png" id='logo'/>
+            </div>
+        </div>
+
+        <script src="reveal.js/lib/js/head.min.js"></script>
+        <script src="reveal.js/js/reveal.js"></script>
+
+        <script>
+
+            // Full list of configuration options available at:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true, // Display controls in the bottom right corner
+                progress: true, // Display a presentation progress bar
+                slideNumber: 'c/t',//'c / t', // page number on current slide
+                history: true,
+                center: true,
+
+                transition: 'slide', // none/fade/slide/convex/concave/zoom
+                backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+
+                math: {
+                    mathjax: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js',
+                    config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+                },
+
+                // Optional reveal.js plugins
+                dependencies: [
+                    { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
+                    { src: 'reveal.js/plugin/math/math.js', async: true },
+                    { src: 'reveal.js/plugin/notes/notes.js', async: true }
+                ]
+            });
+
+        </script>
+
+    </body>
+</html>

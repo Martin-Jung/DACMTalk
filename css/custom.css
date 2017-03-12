@@ -1,0 +1,125 @@
+/* ******** Custom additions ********** */
+/* Special Font */
+@font-face {
+  font-family: "LubalinDemiIBM";
+  src: url("static/ibm.woff") format("woff");
+}
+body {
+  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif !important;
+  color: #222222;
+}
+h1 {font-family: "LubalinDemiIBM" !important; }
+
+/* Make it the default */
+.reveal {  font-family: 'Carlito';  letter-spacing: 0.02em;  text-shadow: none;}
+ul li { margin:20px; vertical-align:top;}
+
+.control {} /* slide with controls */
+
+/* Default image style*/
+img {
+  border: none !important;
+  background: none !important;
+  box-shadow: none !important;
+  max-width:inherit ;
+  max-height:inherit ;
+
+}
+.smt img {width:80%;height:80%;}
+p .smt{font-size:8px; font-family: 'Arial';} /* small text */
+
+/* Footer */
+.footer {
+  position: absolute;
+  left: 0.2em;
+  bottom: 0.2em;
+  z-index: 1000;
+  max-width: 100%;
+  font-size:20px;
+}
+.footer img{ width:12px;height:12px; }
+.footer #twitter {font-size:20px;text-align:center;}
+.footer #logo {width:15%;height:15%;}
+/* Should the blog link be visible on the slide?*/
+.showblog a {font-size:22px;text-align:center;}
+
+/* Title Slide */
+.title-slide {
+  width: 768px;
+  height: 1024px;
+}
+
+#title-box {
+  position: absolute;
+  left:0px;
+  height: 300px;
+  width: inherit;
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border: 1px solid;
+  border-radius: 25px;
+  border-color: #505050;
+  font-family: 'Carlito';
+}
+#title-box h2 {
+font-size: 50px;
+}
+
+#title-box a { color: "#000040";}
+
+#title-box #title{
+  margin:10px;padding:5px;
+  position:absolute;
+  float:both;
+  left:100px;
+  top:100px;
+  font-family: 'Carlito';
+  font-weight:bold;
+  color:#101010;text-align:left;
+}
+#title-box small {color:#FFFACD;font-size:15px;font-weight:bold;position:absolute;bottom:10px;right:0px;text-align:center;margin:5px;}
+
+#left {
+  left:-8.33%;
+  text-align: left;
+  float: left;
+  width:50%;
+  z-index:-10;
+}
+#right {
+  left:31.25%;
+  top: 75px;
+  float: right;
+  text-align: left;
+  z-index:-10;
+  width:50%;
+}
+
+#forms {
+  position: absolute;
+  left:20px;
+  font-size: 32px;
+  text-align: left;
+}
+#forms hr { width: 10%;}
+/* Styling the slide number */
+.reveal .slide-number {
+  color: darkblue;
+  background: transparent;
+  font-size:14px;
+  font-weight:bold;
+}
+
+.dimmed {
+position:absolute;
+left:0;
+background: rgba(255,255,255,.5);
+}
+
+.icon img {
+  width:90px;
+  height:90px;
+  position:absolute;
+  top:0px;
+  right:50px;
+}
