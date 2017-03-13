@@ -76,7 +76,7 @@
             <section data-markdown>
                 <script type="text/template">
                 <!-- .slide: data-background="white" data-transition="concave"-->
-                ## Global biodiversity modelling
+                ## Global biodiversity models
                 <img src='img/newbold.png' height="300px"/>
                 <br>
                 Newbold et al. (2016)
@@ -126,7 +126,7 @@
           <!-- .slide: data-transition="slide-in slide-out" data-background="white" -->
           <p><img src="img/ChangeTypes.png" height="500px"> </img>
           <small>Beaulieu <i>et al</i> (2012) doi: [10.1098/rsta.2011.0383](http://dx.doi.org/10.1098/rsta.2011.0383)</small>
-        </p>
+        </p> <!-- .element: class="fragment fade-in" data-fragment-index="1" -->
           </script>
       </section>
 
@@ -215,6 +215,15 @@
         </script>
     </section>
 
+    <section data-markdown>
+        <script type="text/template">
+          <!-- .slide: data-transition="convex" data-background="white"-->
+          <img src='img/BFAST_map.png'/ height="600px">
+          <small>(Source: DeVries <i>et al.</i> 2015 )</small>
+
+        </script>
+    </section>
+
 </section>
 
 <!-- Starting breakpoint PELT -->
@@ -246,6 +255,17 @@
 
     <section data-markdown>
         <script type="text/template">
+          <!-- .slide: data-transition="convex" data-background="#F9F9F9"-->
+          ### The Pruned Exact Linear Time (PELT) Method
+
+          > The PELT method modifies the optimal partitioning method by pruning.
+          > It combines optimal partitioning and pruning to achieve exact and efficient computational cost which is linear in $ n $.
+
+        </script>
+    </section>
+
+    <section data-markdown>
+        <script type="text/template">
           <!-- .slide: data-transition="convex" data-background="white"-->
           <img src='img/pelt.png'/>
           <center><small>( Source: Michael Messer - Uni Frankfurt )</small></center>
@@ -265,14 +285,14 @@
         <script type="text/template">
           <!-- .slide: data-transition="convex" data-background="white"-->
           <img src='img/Fig_Bfast.png'/>
-
         </script>
     </section>
 
     <section data-markdown>
         <script type="text/template">
           <!-- .slide: data-transition="convex" data-background="white"-->
-          <img src='img/Fig_PELT.png'/>
+          <img src='img/Fig_PELT.png'/ height="500px">
+          <pre><code>cpt.meanvar(xx,penalty = "BIC",test.stat="Normal",minseglen = 12,method = "PELT")</code></pre>
         </script>
     </section>
 
@@ -303,7 +323,7 @@
     <section data-markdown>
         <script type="text/template">
         <!-- .slide: data-background="white" data-transition="slide-in slide-out"-->
-        ### Challenges of working with spatial data
+        ### Challenges of working with spatial-temporal data
         <div id="left">
           <img src='img/StackArrow.png'/ height="400px">
         </div>
@@ -333,7 +353,7 @@
     <section data-markdown>
         <script type="text/template">
         <!-- .slide: data-background="white" data-transition="slide-in slide-out"-->
-        ### Instead Use a hierarchical file format
+        ### Instead use a hierarchical file format
 
         <img src='img/hdf5_structure4.jpg'/>
 
@@ -343,8 +363,19 @@
     <section data-markdown>
         <script type="text/template">
         <!-- .slide: data-background="#F9F9F9" data-transition="slide-in slide-out"-->
-          <img src='img/NEWStorage.png'/ border-color="black">
+          <img src='img/NEWStorage.png'/ style="border:2px solid black;">
         <small> Compression ratio: <b> 64.2 %</b> <small>
+        </script>
+    </section>
+
+    <section data-markdown>
+        <script type="text/template">
+        <!-- .slide: data-background="#F9F9F9" data-transition="slide-in slide-out"-->
+
+        - Hierachical Data Format (HDF) can be opened in R, Python, Matlab, Mathematica, Julia, etc...
+
+        - Self-describing data containers
+
         </script>
     </section>
 
@@ -366,7 +397,6 @@
         </script>
     </section>
 
-
     <section data-markdown>
         <script type="text/template">
         <!-- .slide: data-background="white" data-transition="slide-in slide-out"-->
@@ -382,7 +412,7 @@
         plt.plot(fm.dayofyear,fm.metric)
          </code></pre>
 
-         <img src='img/xrayQuery.png'/ width="200px">
+         <img src='img/xrayQuery.png'/ width="300px">
 
         </script>
     </section>
@@ -452,7 +482,8 @@
         ## Extendable for multiple client workers
         <pre><code data-trim data-noescape>
         from distributed import Client
-        client = Client() # distributes work process over workers
+        client = Client('http://127.0.0.1:8786') # distributes work process over workers
+        > <Client: scheduler='http://127.0.0.1:8786' processes=8 cores=64>
         </code></pre>
 
         <img src='img\grid_search_schedule.gif'/>
