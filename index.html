@@ -225,6 +225,7 @@
         <!-- .slide: data-transition="convex" data-background="#F9F9F9"-->
         ### Changes in mean + variance
         Optimal detection of changepoints with a linear computational cost
+        <br>
         <small>Killick et al. (2012) doi: [10.1080/01621459.2012.737745](http://dx.doi.org/10.1080/01621459.2012.737745)</small>
 
         </script>
@@ -272,7 +273,6 @@
         <script type="text/template">
           <!-- .slide: data-transition="convex" data-background="white"-->
           <img src='img/Fig_PELT.png'/>
-
         </script>
     </section>
 
@@ -433,14 +433,14 @@
     <section data-markdown>
         <script type="text/template">
         <!-- .slide: data-background="white" data-transition="zoom"-->
-        INSERT computation graph
+        <img src='img\DaskGraph.png'/ height="500px">
         </script>
     </section>
 
     <section data-markdown>
         <script type="text/template">
         <!-- .slide: data-background="white" data-transition="zoom"-->
-        > Total: Wall time: 30.7 s
+        > Total: Wall time: 17.7 s
         <img src='img\daskMarchEVI.png'/>
 
         </script>
@@ -449,7 +449,7 @@
     <section data-markdown>
         <script type="text/template">
         <!-- .slide: data-background="white" data-transition="zoom"-->
-        ## Extendable for parallel computing
+        ## Extendable for multiple client workers
         <pre><code data-trim data-noescape>
         from distributed import Client
         client = Client() # distributes work process over workers
